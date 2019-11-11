@@ -1,0 +1,85 @@
+---
+headline: "Homework: Maps and mapping maps and mapping"
+kicker: ""
+---
+
+{{!< bootstrap}}
+
+<div class="alert alert-warning">
+  Maybe you'd be interested in <a href="assets/homework-completed.pdf">the finished page</a>?
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+
+    {{> homework-17/chart-01 }}
+    {{> homework-17/chart-02 }}
+    {{> homework-17/chart-03 }}
+    {{> homework-17/chart-04a }}
+    {{> homework-17/chart-04b }}
+    {{> homework-17/chart-05 }}
+    {{> homework-17/chart-06 }}
+
+  </div>
+</div>
+
+<!-- A few custom styles for this particular homework -->
+
+<style>
+  svg { 
+    display: block;
+    margin: 0 auto;
+  }
+
+  h1 { margin-bottom: 2rem; }
+
+  body {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  h3 { 
+    margin-top: 3rem; 
+    margin-bottom: 1rem;
+  }
+
+  .container {
+    max-width: 66rem;
+  }
+
+  img.block {
+    display: block;
+    border: solid #333 1p;
+    margin: 0 auto;
+  }
+
+  .sphere {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3px;
+  }
+
+/*      .fill {
+    fill: #fff;
+  }
+*/
+  .graticule {
+    fill: none;
+    stroke: #777;
+    stroke-width: .5px;
+    stroke-opacity: .5;
+  }
+
+  h3 small {
+    background: #fff880;
+  }
+
+  #chart-6 svg {
+    display: inline;
+  }
+</style>
+
+<!-- A few extra styles to make things responsive even in Bootstrap -->
+<link rel="stylesheet" href="styles/responsive.css">
+
+<script src="scripts/scrollytelling.js"></script>

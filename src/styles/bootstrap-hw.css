@@ -1,0 +1,81 @@
+svg { 
+  display: block;
+  margin: 0 auto;
+}
+
+h1 { margin-bottom: 2rem; }
+
+body {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+h3 { 
+  margin-top: 3rem; 
+  margin-bottom: 1rem;
+}
+
+.container {
+  max-width: 46rem;
+}
+
+img.block {
+  display: block;
+  border: solid #333 1p;
+  margin: 0 auto;
+}
+
+.axis line, .axis path {
+  stroke-width: 0.5;
+  stroke: #999;
+}
+
+.g-highlight {
+  stroke: red;
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+
+.selected .g-highlight {
+  stroke: green;
+}
+
+.width-line {
+  stroke-width: 0.5;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+text {
+  font-size: 12px;
+}
+
+.width-line-hidden .width-line,
+.width-line-hidden .width-text {
+  visibility: hidden;
+}
+
+.circle-coords-hidden .circle-coords {
+  visibility: hidden;
+}
+
+.g-highlight-hidden .g-highlight,
+.g-highlight-hidden .g-coords {
+  visibility: hidden;
+}
+
+pre.code {
+  background: #333;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+}
+pre em {
+  color: yellow;
+  font-style: normal;
+}
+.demo {
+  border: solid black 1px;
+  margin-bottom: 1rem;
+}
