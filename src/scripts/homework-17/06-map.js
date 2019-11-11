@@ -17,7 +17,7 @@ const path = d3.geoPath().projection(projection)
 const colorScale = d3
   .scaleOrdinal(d3.schemeCategory10)
   .domain([
-    'hydrolectric',
+    'hydroelectric',
     'coal',
     'natural gas',
     'nuclear',
@@ -82,6 +82,8 @@ function ready([json, datapoints]) {
         .attr('d', path)
         .attr('fill', 'lightgrey')
 
+      const source = d.key
+
       // add one circle for every powerplant
       svg
         .selectAll('.plant-circle')
@@ -90,7 +92,7 @@ function ready([json, datapoints]) {
         .append('circle')
         .attr('r', d => radiusScale(d.Total_MW))
         .attr('opacity', 0.5)
-        .attr('fill', d => colorScale(d.key))
+        .attr('fill', colorScale(source))
         .attr('transform', function(d) {
           const coords = [d.Longitude, d.Latitude]
           // console.log(projection(coords))
