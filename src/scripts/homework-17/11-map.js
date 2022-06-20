@@ -1,9 +1,9 @@
 import * as d3 from 'd3'
 import { parse } from 'handlebars'
 // import { getConsoleOutput } from 'jest-util'
-import * as topojson from 'topojson'
+import * as topojson from 'topojson-client'
 
-const margin = { top: 0, left: 0, right: 0, bottom: 0 }
+const margin = { top: 50, left: 50, right: 50, bottom: 50 }
 
 const height = 600 - margin.top - margin.bottom
 
@@ -12,8 +12,10 @@ const width = 900 - margin.left - margin.right
 const svg = d3
   .select('#chart-11')
   .append('svg')
-  .attr('height', height + margin.top + margin.bottom)
-  .attr('width', width + margin.left + margin.right)
+  .attr('class', 'elec-chart__body')
+  // .attr('height', height + margin.top + margin.bottom)
+  // .attr('width', width + margin.left + margin.right)
+  .attr('viewBox', `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`)
   .append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
@@ -28,7 +30,7 @@ const projection = d3.geoConicConformal()
 const path = d3.geoPath().projection(projection)
 
 const radiusScale = d3.scaleLinear().domain([0,50000]).range([10, 140])
-const strokeScale = d3.scaleLinear().domain([0,50000]).range([1.5,5])
+const strokeScale = d3.scaleLinear().domain([0,50000]).range([1.5,4])
 
 Promise.all([
   d3.json(require('/data/pa_counties_suprm21_suprm17.topojson')),
@@ -53,7 +55,7 @@ function ready([json]) {
     .enter()
     .append('path')
     .attr('class', function(d) {
-      return 'county ' + d.properties.NAME
+      return `county county--${d.properties.NAME.toLowerCase().replace(" ","-")}`
     })
     .attr('d', path)
     .attr('fill', 'white')
@@ -80,6 +82,7 @@ function ready([json]) {
     .append('path')
     .attr('d', d3.line()([[0, 0], [0, 4], [4, 2]]))
     .attr('fill', '#1A6AFF')
+    .attr('opacity', 1)
 
   // add gray arrows for negative values
   svg
@@ -95,6 +98,7 @@ function ready([json]) {
     .append('path')
     .attr('d', d3.line()([[0, 0], [0, 4], [4, 2]]))
     .attr('fill', '#36454F')
+    .attr('opacity', 1)
     // inspect McKean county!!
 
   // add a line for every county
@@ -110,6 +114,7 @@ function ready([json]) {
       console.log(radiusScale(d.properties.DEMVoteDelta))
       return path.centroid(d)[1] - radiusScale(Math.abs(d.properties.DEMVoteDelta))
     })
+    .attr('class', 'lines')
     .attr('opacity', 1)
     .attr('stroke', d => {
         if (d.properties.DEMVoteDelta > 0) return '#1A6AFF'
@@ -146,7 +151,7 @@ function ready([json]) {
     .data(datapoints.features)
     .enter()
     .append('g')
-    .attr('class', d => `labels labels--${d.properties.NAME.toLowerCase()}`)
+    .attr('class', d => `labels labels--${d.properties.NAME.toLowerCase().replace(" ","-")}`)
     .attr('opacity', 0)
 
   // county name
@@ -172,7 +177,8 @@ function ready([json]) {
   labels
     .append('text')
     .text(function(d) {
-      return `${parseFloat((Math.abs(d.properties.DEMVoteDelta)*100).toFixed(1))}%`
+      const gain = d.properties.DEMVoteDelta > 0 ? '+' : ''
+      return `${gain}${d3.format(",")(parseFloat((d.properties.DEMVoteDelta)).toFixed(1))} votes`
     })
     .attr('transform', function(d) {
       return `translate(${path.centroid(d)})`

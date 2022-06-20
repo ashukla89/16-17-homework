@@ -3,7 +3,7 @@ import { parse } from 'handlebars'
 // import { getConsoleOutput } from 'jest-util'
 import * as topojson from 'topojson'
 
-const margin = { top: 0, left: 150, right: 0, bottom: 0 }
+const margin = { top: 50, left: 50, right: 50, bottom: 50 }
 
 const height = 600 - margin.top - margin.bottom
 
@@ -12,8 +12,10 @@ const width = 900 - margin.left - margin.right
 const svg = d3
   .select('#chart-7')
   .append('svg')
-  .attr('height', height + margin.top + margin.bottom)
-  .attr('width', width + margin.left + margin.right)
+  .attr('class', 'elec-chart__body')
+  .attr('viewBox', `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`)
+  // .attr('height', height + margin.top + margin.bottom)
+  // .attr('width', width + margin.left + margin.right)
   .append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
@@ -53,7 +55,7 @@ function ready([json]) {
     .enter()
     .append('path')
     .attr('class', function(d) {
-      return 'county ' + d.properties.NAME
+      return `county county--${d.properties.NAME.toLowerCase().replace(" ","-")}`
     })
     .attr('d', path)
     .attr('fill', 'white')
@@ -80,6 +82,7 @@ function ready([json]) {
     .append('path')
     .attr('d', d3.line()([[0, 0], [0, 4], [4, 2]]))
     .attr('fill', '#1A6AFF')
+    .attr('opacity', 1)
 
   // add red arrows for red counties
   svg
@@ -95,6 +98,7 @@ function ready([json]) {
     .append('path')
     .attr('d', d3.line()([[0, 0], [0, 4], [4, 2]]))
     .attr('fill', '#D03240')
+    .attr('opacity', 1)
     // inspect McKean county!!
 
   // add a line for every county
@@ -110,6 +114,7 @@ function ready([json]) {
       console.log(radiusScale(Math.abs(d.properties.DEMShareDiff)))
       return path.centroid(d)[1] - radiusScale(Math.abs(d.properties.DEMShareDiff))
     })
+    .attr('class', 'lines')
     .attr('opacity', 1)
     .attr('stroke', d => {
         if (d.properties.DEMShareDiff > 0) return '#1A6AFF'
@@ -146,7 +151,7 @@ function ready([json]) {
     .data(datapoints.features)
     .enter()
     .append('g')
-    .attr('class', d => `labels labels--${d.properties.NAME.toLowerCase()}`)
+    .attr('class', d => `labels labels--${d.properties.NAME.toLowerCase().replace(" ","-")}`)
     .attr('opacity', 0)
 
   // county name
@@ -164,7 +169,7 @@ function ready([json]) {
     .attr('font-family', '"Ringside Regular SSm","Verdana",sans-serif')
     .style(
       'text-shadow',
-      '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'
+      '-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff'
     )
     .style('font-weight','bold')
 
@@ -172,10 +177,14 @@ function ready([json]) {
   labels
     .append('text')
     .text(function(d) {
-      return `${parseFloat((Math.abs(d.properties.DEMShareDiff)*100).toFixed(1))}%`
+      return `${parseFloat((Math.abs(d.properties.DEMShareDiff)*100).toFixed(2))}-point shift`
     })
     .attr('transform', function(d) {
       return `translate(${path.centroid(d)})`
+    })
+    .attr('class', function(d) {
+      if (d.properties.DEMShareDiff > 0) return 'dem'
+      else return 'rep'
     })
     .attr('dy', 35)
     .attr('text-anchor', 'middle')
@@ -183,6 +192,34 @@ function ready([json]) {
     .attr('font-family', '"Ringside Regular SSm","Verdana",sans-serif')
     .style(
       'text-shadow',
-      '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'
+      '-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff'
     )
+
+  // labels
+  //   .append('text')
+  //   .text(function(d) {
+  //     return `${parseFloat((Math.abs(d.properties.DEMShareNew)*100).toFixed(1))}% D (2021)`
+  //   })
+  //   .attr('transform', function(d) {
+  //     return `translate(${path.centroid(d)})`
+  //   })
+  //   .attr('dy', 55)
+  //   .attr('text-anchor', 'middle')
+  //   .attr('alignment-baseline', 'middle')
+  //   .attr('font-family', '"Ringside Regular SSm","Verdana",sans-serif')
+  //   .style(
+  //     'text-shadow',
+  //     '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'
+  //   )
+
+  // // generate some .css dynamically
+  // const countyList = datapoints.features.map(d => d.properties.NAME.toLowerCase().replace(" ","-"))
+
+  // let css = '';
+
+  // countyList.forEach(county => {
+  //  css += `.county--${county}:hover ~ .labels--${county} { opacity: 1; }`
+  // });
+
+  // console.log(css)
 }

@@ -1,13 +1,13 @@
 ---
-headline: "Homework: Maps and mapping maps and mapping"
+headline: "Maps and mapping maps and mapping"
 kicker: ""
 ---
 
 {{!< bootstrap}}
 
-<div class="alert alert-warning">
+{{!-- <div class="alert alert-warning">
   Maybe you'd be interested in <a href="assets/homework-completed.pdf">the finished page</a>?
-</div>
+</div> --}}
 
 <div class="row mt-3">
   <div class="col-12">
@@ -19,13 +19,18 @@ kicker: ""
     {{> homework-17/chart-04b }}
     {{> homework-17/chart-05 }}
     {{> homework-17/chart-06 }} --}}
-    {{> homework-17/chart-07 }}
+    {{!-- {{> homework-17/chart-07 }}
     {{> homework-17/chart-08 }}
     {{> homework-17/chart-09 }}
     {{> homework-17/chart-10 }}
     {{> homework-17/chart-11 }}
     {{> homework-17/chart-12 }}
-    {{> homework-17/chart-13 }}
+    {{> homework-17/chart-13 }} --}}
+    {{> homework-17/pa-r-prim-22 }}
+    {{> homework-17/pa-d-prim-22 }}
+    {{> homework-17/pa-r-prim-ab-22 }}
+    {{> homework-17/pa-d-prim-ab-22 }}
+    
 
   </div>
 </div>
@@ -37,6 +42,42 @@ kicker: ""
     display: block;
     margin: 0 auto;
   }
+
+  .elec-chart__body {
+    width: 100%;
+    max-width: 900px;
+    max-height: 600px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .labels {
+   pointer-events: none;
+   transition: opacity 0.2s linear;
+  }
+
+  .lines {
+   pointer-events: none;
+  }
+
+  .county{
+    cursor: pointer;
+    transition: fill 0.2s linear;
+  }
+
+  .dem {
+    fill: #00008b
+  }
+
+  .rep {
+    fill: #8B0000
+  }
+
+  .county:hover {fill: #eee}
+
+  .county--carbon:hover ~ .labels--carbon { opacity: 1; }.county--adams:hover ~ .labels--adams { opacity: 1; }.county--beaver:hover ~ .labels--beaver { opacity: 1; }.county--montour:hover ~ .labels--montour { opacity: 1; }.county--schuylkill:hover ~ .labels--schuylkill { opacity: 1; }.county--tioga:hover ~ .labels--tioga { opacity: 1; }.county--snyder:hover ~ .labels--snyder { opacity: 1; }.county--mckean:hover ~ .labels--mckean { opacity: 1; }.county--northampton:hover ~ .labels--northampton { opacity: 1; }.county--westmoreland:hover ~ .labels--westmoreland { opacity: 1; }.county--lebanon:hover ~ .labels--lebanon { opacity: 1; }.county--lycoming:hover ~ .labels--lycoming { opacity: 1; }.county--union:hover ~ .labels--union { opacity: 1; }.county--venango:hover ~ .labels--venango { opacity: 1; }.county--luzerne:hover ~ .labels--luzerne { opacity: 1; }.county--sullivan:hover ~ .labels--sullivan { opacity: 1; }.county--cameron:hover ~ .labels--cameron { opacity: 1; }.county--chester:hover ~ .labels--chester { opacity: 1; }.county--bedford:hover ~ .labels--bedford { opacity: 1; }.county--franklin:hover ~ .labels--franklin { opacity: 1; }.county--lehigh:hover ~ .labels--lehigh { opacity: 1; }.county--mifflin:hover ~ .labels--mifflin { opacity: 1; }.county--montgomery:hover ~ .labels--montgomery { opacity: 1; }.county--perry:hover ~ .labels--perry { opacity: 1; }.county--philadelphia:hover ~ .labels--philadelphia { opacity: 1; }.county--juniata:hover ~ .labels--juniata { opacity: 1; }.county--delaware:hover ~ .labels--delaware { opacity: 1; }.county--columbia:hover ~ .labels--columbia { opacity: 1; }.county--clarion:hover ~ .labels--clarion { opacity: 1; }.county--blair:hover ~ .labels--blair { opacity: 1; }.county--berks:hover ~ .labels--berks { opacity: 1; }.county--bucks:hover ~ .labels--bucks { opacity: 1; }.county--crawford:hover ~ .labels--crawford { opacity: 1; }.county--lancaster:hover ~ .labels--lancaster { opacity: 1; }.county--potter:hover ~ .labels--potter { opacity: 1; }.county--warren:hover ~ .labels--warren { opacity: 1; }.county--dauphin:hover ~ .labels--dauphin { opacity: 1; }.county--lawrence:hover ~ .labels--lawrence { opacity: 1; }.county--susquehanna:hover ~ .labels--susquehanna { opacity: 1; }.county--monroe:hover ~ .labels--monroe { opacity: 1; }.county--armstrong:hover ~ .labels--armstrong { opacity: 1; }.county--wyoming:hover ~ .labels--wyoming { opacity: 1; }.county--butler:hover ~ .labels--butler { opacity: 1; }.county--huntingdon:hover ~ .labels--huntingdon { opacity: 1; }.county--mercer:hover ~ .labels--mercer { opacity: 1; }.county--clinton:hover ~ .labels--clinton { opacity: 1; }.county--cumberland:hover ~ .labels--cumberland { opacity: 1; }.county--erie:hover ~ .labels--erie { opacity: 1; }.county--northumberland:hover ~ .labels--northumberland { opacity: 1; }.county--forest:hover ~ .labels--forest { opacity: 1; }.county--washington:hover ~ .labels--washington { opacity: 1; }.county--greene:hover ~ .labels--greene { opacity: 1; }.county--fayette:hover ~ .labels--fayette { opacity: 1; }.county--jefferson:hover ~ .labels--jefferson { opacity: 1; }.county--pike:hover ~ .labels--pike { opacity: 1; }.county--centre:hover ~ .labels--centre { opacity: 1; }.county--fulton:hover ~ .labels--fulton { opacity: 1; }.county--elk:hover ~ .labels--elk { opacity: 1; }.county--clearfield:hover ~ .labels--clearfield { opacity: 1; }.county--bradford:hover ~ .labels--bradford { opacity: 1; }.county--somerset:hover ~ .labels--somerset { opacity: 1; }.county--lackawanna:hover ~ .labels--lackawanna { opacity: 1; }.county--allegheny:hover ~ .labels--allegheny { opacity: 1; }.county--cambria:hover ~ .labels--cambria { opacity: 1; }.county--york:hover ~ .labels--york { opacity: 1; }.county--indiana:hover ~ .labels--indiana { opacity: 1; }.county--wayne:hover ~ .labels--wayne { opacity: 1; }
+
+  .county--middlesex:hover ~ .labels--middlesex { opacity: 1; }.county--hudson:hover ~ .labels--hudson { opacity: 1; }.county--morris:hover ~ .labels--morris { opacity: 1; }.county--gloucester:hover ~ .labels--gloucester { opacity: 1; }.county--monmouth:hover ~ .labels--monmouth { opacity: 1; }.county--ocean:hover ~ .labels--ocean { opacity: 1; }.county--essex:hover ~ .labels--essex { opacity: 1; }.county--burlington:hover ~ .labels--burlington { opacity: 1; }.county--cumberland:hover ~ .labels--cumberland { opacity: 1; }.county--salem:hover ~ .labels--salem { opacity: 1; }.county--passaic:hover ~ .labels--passaic { opacity: 1; }.county--somerset:hover ~ .labels--somerset { opacity: 1; }.county--sussex:hover ~ .labels--sussex { opacity: 1; }.county--union:hover ~ .labels--union { opacity: 1; }.county--warren:hover ~ .labels--warren { opacity: 1; }.county--atlantic:hover ~ .labels--atlantic { opacity: 1; }.county--camden:hover ~ .labels--camden { opacity: 1; }.county--hunterdon:hover ~ .labels--hunterdon { opacity: 1; }.county--mercer:hover ~ .labels--mercer { opacity: 1; }.county--cape-may:hover ~ .labels--cape-may { opacity: 1; }.county--bergen:hover ~ .labels--bergen { opacity: 1; }
 
   h1 { margin-bottom: 2rem; }
 
