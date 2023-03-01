@@ -34,7 +34,7 @@
     "glob": "^7.1.4",
     "gulp-header": "^2.0.9",
     "handlebars": "^4.3.0",
-    "http-server": "^0.11.1",
+    "http-server": "^14.1.1",
     "inline-source": "^7.1.0",
     "jest": "^24.9.0",
     "parcel-bundler": "^1.12.3",
